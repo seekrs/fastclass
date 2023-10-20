@@ -8,7 +8,7 @@ A C program destined to make C++ classes faster following the orthodox canonical
 Clone the repo and use ```make``` :  
 Will compile fastclass in ```/nfs/homes/${USER}/.local/bin/```  
 Typing ```make custom``` will prompt you before compilation for your NAME and EMAIL SUFFIX for the 42Header implementation.
-
+```make here``` will compile the program in the current working directory.
 ## How to use
 
 The format for using fastclass is : ```class [-FLAGS] [FILES] ...```
