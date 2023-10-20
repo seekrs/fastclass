@@ -21,7 +21,7 @@ custom :
 	echo "\e[1;32m[build successfull]\e[1;00m"
 
 here :
-	@{CC} ${FLAGS} ${SRCS} -o ${NAME}
+	${CC} ${FLAGS} ${SRCS} -o ${NAME}
 
 remove: 
 	/bin/rm ${PATH}/${NAME}
