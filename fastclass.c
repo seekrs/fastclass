@@ -100,7 +100,7 @@ int print_help(void)
 	printf("USAGE : \e[1mclass\e[m [-fp] [FILE] ...\n");
 	printf("FLAGS USAGE :\n");
 	printf("\t\e[1m-h\e[m : prints this help\n");
-	printf("\t\e[1m-f\e[m : create the class with the 42 header with the USER define in autoclass.c\n");
+	printf("\t\e[1m-f\e[m : create the class with the 42 header with the USER and MAIL defines\n");
 	printf("\t\e[1m-p\e[m : create the class with std::cout output for constructors and destructors\n");
 	return (0);
 }
