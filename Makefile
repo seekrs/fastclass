@@ -11,17 +11,14 @@ FLAGS = -Wall -Wextra -Werror
 all: ${NAME}
 
 ${NAME}:
-	@${CC} ${FLAGS} ${SRCS} -o ${PATH}/${NAME}; \
+	@${CC} ${FLAGS} ${SRCS} -o ${NAME}; \
 	echo "\e[1;32m[build successfull]\e[1;00m"
 
-custom :
+install : 
 	@read -p "Enter your username, it will appear on your 42Header as (USERNAME@EMAIL) : " class_username; \
 	read -p "Enter your email, it will appear on your 42Header as (USERNAME@EMAIL): " class_email; \
-	${CC} ${FLAGS} ${SRCS} -D USER=\"$$class_username\" -D MAIL=\"$$class_email\" -o ${PATH}/${NAME}; \
+	${CC} ${FLAGS} ${SRCS} -D USER=\"$$class_username\" -D MAIL=\"$$class_email\" -o /nfs/homes/${USER}/.local/bin/${NAME}; \
 	echo "\e[1;32m[build successfull]\e[1;00m"
-
-here :
-	${CC} ${FLAGS} ${SRCS} -o ${NAME}
 
 remove: 
 	/bin/rm ${PATH}/${NAME}
