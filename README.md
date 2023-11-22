@@ -5,8 +5,8 @@ A C program destined to make C++ classes faster following the orthodox canonical
 
 ## How to install
 
-Clone the repo and use ```make``` : 
-Will compile fastclass in current directory
+Clone the repo and use ```make``` :  
+Will compile fastclass in current directory  
 ```make install``` :
 Will compile fastclass in ```/nfs/homes/${USER}/.local/bin/```  
 ## How to use
