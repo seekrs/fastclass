@@ -80,7 +80,10 @@ void	create_class(char *name, int fd)
 
 void	create_cpp(char *name, int fd, bool print)
 {
-	dprintf(fd, "#include \"%s.hpp\"\n#include <iostream>\n\n%s::%s(void)\n{\n", name, name, name);
+	dprintf(fd, "#include \"%s.hpp\"\n", (name));
+	if (print)
+		dprintf(fd, "#include <iostream>\n");
+	dprintf(fd, "\n%s::%s(void)\n{\n", name, name);
 	if (print)
 		dprintf(fd, "\tstd::cout << \"%s Constructor called\" << std::endl;", name);
 	dprintf(fd, "\n}\n\n%s::~%s(void)\n{\n", name, name);
@@ -95,14 +98,13 @@ void	create_cpp(char *name, int fd, bool print)
 	dprintf(fd, "\treturn (*this);\n}\n");
 }
 
-int print_help(void)
+void print_help(void)
 {
 	printf("USAGE : \e[1mclass\e[m [-fp] [FILE] ...\n");
 	printf("FLAGS USAGE :\n");
 	printf("\t\e[1m-h\e[m : prints this help\n");
 	printf("\t\e[1m-f\e[m : create the class with the 42 header with the USER and MAIL defines\n");
 	printf("\t\e[1m-p\e[m : create the class with std::cout output for constructors and destructors\n");
-	return (0);
 }
 
 int main(int argc, char **argv)
@@ -113,12 +115,18 @@ int main(int argc, char **argv)
 	bool print = false;
 
 	if (argc == 1)
+	{
+		print_help();
 		return (0);
+	}
 	argv++;
 	if (strlen(*argv) >= 2 && **argv == '-')
 	{
 		if (strchr(*argv, 'h') && strlen(*argv) == 2)
-			return (print_help());
+		{
+			print_help();
+			return 0;
+		}
 		if (strchr(*argv, 'f'))
 			header = true;
 		if (strchr(*argv, 'p'))
