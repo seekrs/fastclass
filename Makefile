@@ -1,8 +1,9 @@
 NAME = class
 
-SRCS = fastclass.c
+SRCS = fastclass.c \
+		42_header.c
 
-CC = /bin/clang
+CC = clang
 
 INSTALL_PATH ?= $(HOME)/.local/bin
 
@@ -12,16 +13,16 @@ all: ${NAME}
 
 ${NAME}:
 	@${CC} ${FLAGS} ${SRCS} -o ${NAME}; \
-	echo "\e[1;32m[build successfull]\e[1;00m"
+	printf "\e[1;32m[build successfull]\e[1;00m\n"
 
 install : 
 	@read -p "Enter your username, it will appear on your 42Header as (USERNAME@EMAIL) : " class_username; \
 	read -p "Enter your email, it will appear on your 42Header as (USERNAME@EMAIL): " class_email; \
 	${CC} ${FLAGS} ${SRCS} -D USER=\"$$class_username\" -D MAIL=\"$$class_email\" -o $(INSTALL_PATH)/${NAME}; \
-	echo "\e[1;32m[build successfull]\e[1;00m"
+	printf "\e[1;32m[build successfull]\e[1;00m\n"
 
-remove: 
-	/bin/rm $(INSTALL_PATH)/${NAME}
+remove:
+	rm $(INSTALL_PATH)/${NAME}
 
 re:	remove install
 
