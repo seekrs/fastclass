@@ -92,7 +92,6 @@ void print_help(void)
 int main(int argc, char **argv)
 {
 	char *name;
-	short fd = 0;
 	unsigned int flags = 0;
 
 	if (argc == 1)
