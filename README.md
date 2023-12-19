@@ -41,4 +41,4 @@ You can use `make remove` to delete the binary file located in `INSTALL_PATH`.
 
 ## License
 
-(wtfpl)[./LICENSE]
+[wtfpl](./LICENSE)
