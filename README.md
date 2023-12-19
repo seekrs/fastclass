@@ -32,6 +32,7 @@ The format for using fastclass is: `class [-FLAGS] [FILES] ...`
 
 * `-f` will insert the 42Header in all classes created using NAME and MAIL defines.
 * `-p` will insert `std::cout` output for the constructors and destructors.
+* `-s` create the class as a static class, making all constructors privates.
 * `-h` will print this help.
 
 ## How to uninstall
