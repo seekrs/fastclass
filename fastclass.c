@@ -36,6 +36,12 @@ void	create_class(char *filename, char *name, unsigned int flags)
 		fd = set_42_header(filename, true);
 	else
 		fd = open(filename, O_CREAT | O_WRONLY, 0644);
+	if (fd == -1)
+	{
+		free(upper);
+		dprintf(STDERR_FILENO, "unable to create .hpp\n");
+		return ;
+	}
 	dprintf(fd, "#ifndef __%s__\n", upper); 
 	dprintf(fd, "# define __%s__\n", upper);
 	dprintf(fd, "\nclass %s\n", name);
@@ -49,6 +55,7 @@ void	create_class(char *filename, char *name, unsigned int flags)
 		dprintf(fd, "\t\t%s(void);\n\t\t%s(%s &copy);\n\t\t%s& operator=(const %s& x);\n", name, name, name, name, name);
 	dprintf(fd, "\n};\n\n#endif");
 	free(upper);
+	printf("created %s successfully\n", filename);
 	close(fd);
 }
 
@@ -60,6 +67,11 @@ void	create_cpp(char *filename, char *name, unsigned int flags)
 		fd = set_42_header(filename, true);
 	else
 		fd = open(filename, O_CREAT | O_WRONLY, 0644);
+	if (fd == -1)
+	{
+		dprintf(STDERR_FILENO, "unable to create .cpp\n");
+		return ;
+	}
 	dprintf(fd, "#include \"%s.hpp\"\n", (name));
 	if (has_flag(flags, PRINT_CONSTRUCTOR))
 		dprintf(fd, "#include <iostream>\n");
@@ -76,6 +88,7 @@ void	create_cpp(char *filename, char *name, unsigned int flags)
 	if (has_flag(flags, PRINT_CONSTRUCTOR))
 		dprintf(fd, "\tstd::cout << \"Copy assignment operator called\" << std::endl;\n");
 	dprintf(fd, "\treturn (*this);\n}\n");
+	printf("created %s successfully\n", filename);
 	close(fd);
 }
 
@@ -118,23 +131,17 @@ int main(int argc, char **argv)
 	while (*argv && strlen(*argv) > 0)
 	{
 		name = calloc(sizeof(char), strlen(*argv) + 5);
-		name = strcat(name, *argv);
+		name = strcpy(name, *argv);
 		name = strcat(name, ".hpp");
 		if (access(name, F_OK) == 0)
 			dprintf(2, "WARNING : %s already exists, trying to make .cpp\n", name);
 		else
-		{
 			create_class(name, *argv, flags);
-			printf("created %s successfully\n", name);
-		}
 		name[strlen(*argv) + 1] = 'c';
 		if (access(name, F_OK) == 0)
 			dprintf(2, "WARNING : %s already exists, aborting\n", name);
 		else
-		{
 			create_cpp(name, *argv, flags);
-			printf("created %s successfully\n", name);
-		}
 		free(name);
 		argv++;
 	}
