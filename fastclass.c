@@ -13,9 +13,9 @@
 #define STATIC_CLASS 2u
 #define has_flag(flags, flag) (flags >> flag & 1)
 
-int	set_42_header(char *path, bool open_fd);
+int	set_42_header(const char *restrict path, bool open_fd);
 
-char *ft_toupper(char *str)
+char *ft_toupper(const char *restrict str)
 {
 	char *buf;
 	unsigned int i;
@@ -27,7 +27,7 @@ char *ft_toupper(char *str)
 	return (buf);
 }
 
-void	create_class(char *filename, char *name, unsigned int flags)
+void	create_class(const char *restrict filename, const char *restrict name, unsigned int flags)
 {
 	char *upper = ft_toupper(name);
 	int fd;
@@ -59,7 +59,7 @@ void	create_class(char *filename, char *name, unsigned int flags)
 	close(fd);
 }
 
-void	create_cpp(char *filename, char *name, unsigned int flags)
+void	create_cpp(char *restrict filename, char *restrict name, unsigned int flags)
 {
 	int fd;
 
@@ -134,12 +134,12 @@ int main(int argc, char **argv)
 		name = strcpy(name, *argv);
 		name = strcat(name, ".hpp");
 		if (access(name, F_OK) == 0)
-			dprintf(2, "WARNING : %s already exists, trying to make .cpp\n", name);
+			dprintf(STDERR_FILENO, "WARNING : %s already exists, trying to make .cpp\n", name);
 		else
 			create_class(name, *argv, flags);
 		name[strlen(*argv) + 1] = 'c';
 		if (access(name, F_OK) == 0)
-			dprintf(2, "WARNING : %s already exists, aborting\n", name);
+			dprintf(STDERR_FILENO, "WARNING : %s already exists, aborting\n", name);
 		else
 			create_cpp(name, *argv, flags);
 		free(name);

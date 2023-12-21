@@ -11,7 +11,7 @@
 # define MAIL "student.42.fr"
 # endif
 
-int	set_42_header(char *path, bool open_fd)
+int	set_42_header(const char *restrict path, bool open_fd)
 {
 	time_t ltime = time(NULL);
 	int fd;
