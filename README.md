@@ -1,5 +1,5 @@
 
-# fastclass
+# fastclass <a href="https://github.com/seekrs/fastclass/actions/workflows/makefile.yml"><img src="https://github.com/seekrs/fastclass/actions/workflows/makefile.yml/badge.svg"></a>
 
 A C program destined to make C++ classes faster following the orthodox canonical class form.
 
